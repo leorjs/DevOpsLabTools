@@ -194,7 +194,7 @@ Tips & Bonus: Para verificar que la conexión desde el adminserver a los nodes e
 $ ssh -v node1 (*Debe entrar directo al node, si pide clave debes volver al punto numero uno en la parte de generación de key*)
 
 
-![](./Images/ansibleok.png]]
+![](./Images/ansibleok.png)
 
 
 ## Instalación de Portainer en docker
@@ -221,10 +221,13 @@ cr.portainer.io/portainer/portainer-ce:2.9.3
 
 
 Ya debería estar corriendo nuestro docker con Portainer
+
+```
 vagrant@AdminServer:~$ docker ps
 CONTAINER ID   IMAGE                                          COMMAND        CREATED              STATUS              PORTS                                                                                            NAMES
 773f15fef7a1   cr.portainer.io/portainer/portainer-ce:2.9.3   "/portainer"   About a minute ago   Up About a minute   0.0.0.0:8000->8000/tcp, :::8000->8000/tcp, 0.0.0.0:9443->9443/tcp, :::9443->9443/tcp, 9000/tcp   portainer
-vagrant@AdminServer:~$
+vagrant@AdminServer:
+```
 
 
 ### Configurar el servidor Portainer en Docker
@@ -237,11 +240,11 @@ Consola web: https://172.16.1.50:9443/
 
 Cuando entramos por primera vez nos pide crear un usuario de admin y la clave
 
-![](./Images/Dashboardinicio.png]]
+![](./Images/Dashboardinicio.png)
 
 Dentro del Dashboard de Portainer nos aparecerá lo siguiente la cual estaremos viendo solamente los contenedores locales donde se instalo el Portainer, en este caso *AdminServer*
 
-![](./Images/home1.png]]
+![](./Images/home1.png)
 
 
 ## Instalación del Agent
@@ -271,5 +274,5 @@ docker run -d \
 
 4. Ahora entraremos a nuestros node4 y ejecutaremos ese bloque de comando, una vez finalizado vamos al Home de nuestro Portainer
 5. Y allí ya observaremos que tendremos nuestro node conectado a nuestro Portainer
-![](./Images/homenodes.png]]
+![](./Images/homenodes.png)
 
