@@ -236,7 +236,7 @@ En nuestro caso tenemos una IP para el AdminServer:
 Consola web: https://172.16.1.50:9443/
 
 Cuando entramos por primera vez nos pide crear un usuario de admin y la clave
-
+obsidian://open?vault=Doc%20knowledge&file=Pasted%20image%2020230220180659.png
 ![[Pasted image 20230220171549.png]]
 
 Dentro del Dashboard de Portainer nos aparecerá lo siguiente la cual estaremos viendo solamente los contenedores locales donde se instalo el Portainer, en este caso *AdminServer*
