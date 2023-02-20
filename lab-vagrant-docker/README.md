@@ -194,7 +194,7 @@ Tips & Bonus: Para verificar que la conexión desde el adminserver a los nodes e
 $ ssh -v node1 (*Debe entrar directo al node, si pide clave debes volver al punto numero uno en la parte de generación de key*)
 
 
-![](./Images/ansibleok.png)
+![ansible](./Images/ansibleok.png)
 
 
 ## Instalación de Portainer en docker
