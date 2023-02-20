@@ -1,19 +1,19 @@
 ## Laboratorio  para poder probar las diferentes tecnologías que el DevOps y/o SRE nos lleva a conocer.
 
-En este Lab que se instalará obtendremos las siguientes tecnologías:
+En este Lab que se instalará las siguientes tecnologías:
 
 ```` Software
-➡️  Vagrant
-➡️  Docker
-➡️  Ansible
-➡️  Portainer
+➡️  Vagrant >> Es una herramienta para automatizar la creación y configuración de entornos de desarrollo virtualizados en distintos sistemas operativos.
+➡️  Docker >> Es una plataforma de software que permite crear, ejecutar y distribuir aplicaciones en contenedores. Los contenedores permiten empaquetar una aplicación con todas sus dependencias y configuraciones, lo que facilita su implementación y gestión en diferentes entornos.
+➡️  Ansible >> Es una herramienta de automatización de TI que permite configurar y administrar sistemas de manera eficiente y repetitiva. Utiliza un lenguaje de scripting simple para definir tareas y procedimientos, lo que facilita la creación de playbooks que automatizan la configuración y administración de infraestructuras.
+➡️  Portainer >> Es una plataforma de administración de contenedores que proporciona una interfaz gráfica de usuario para administrar y visualizar los contenedores de Docker. Portainer permite gestionar múltiples hosts de Docker desde una única interfaz, lo que facilita la administración de aplicaciones y servicios en contenedores.
 ````
 
-Vamos a trabajar con la herramienta de vagrant, la cual nos permite ser flexible para agregar y/o eliminar nodos para nuestro distintos lab. (*Para este caso nuestro laboratorio base contendra 1 AdminServer y 3 nodos*)
+Como lo comente antes vamos a trabajar con la *herramienta de vagrant*, la cual nos permite ser flexible para agregar y/o eliminar nodos para nuestro distintos lab. (*Para este caso nuestro laboratorio base contendra 1 AdminServer y 3 nodos*)
 
-Dejo el link oficial para la instalación de vagrant que dependera de tu sistema operativo. >> [Installl vagrant](https://developer.hashicorp.com/vagrant/downloads)
+Dejo el link oficial para la instalación de vagrant que dependera de tu sistema operativo. >> [Install vagrant](https://developer.hashicorp.com/vagrant/downloads)
 
-Para la verificación que tenemos vagrant instalado le damos el siguiente comando y nos arrojara la versión instalada:
+Luego de seguir los pasos de la guia oficial, verifiquemos nuestro vagrant instalado. Agregamos el siguiente comando y nos arrojara la versión instalada:
 `$ vagrant -v`
 
 Para comenzar la modificación necesaria debemos iniciar vagrant para que se cree el archivo `Vagrantfile`
@@ -25,17 +25,30 @@ Nos genera un archivo por default llamado __*Vagranfile*__ la cual estaremos mod
 
 ```Tips
 
-Para que no de error al correr el vagranfile se debe instalar: 
+Es posible que al momento de levantar nuestro vagrant nos pueda dar error para eso debemos instalar lo siguiente: 
 $ vagrant plugin install vagrant-vbguest
 
 -- Si estás en windows se debe ejecutar el powershell como `administrador`
 -- Si estás en Linux se debe ejecutar con `sudo`
 ```
 
+Para continuar debemos iniciar nuestro laboratorio con el siguiente comando:
+
+$ vagrant up >> Con este comando iniciara tanto el AdminServer como los nodos
+
+Ahora si quieres iniciar más adelante solamente un nodo o el AdminServer:
+$ vagrant up AdminServer
+$ vagrant up Nodo1
+
+Si queremos bajar todo el Lab;
+$ vagrant halt
+
+De igual forma dejo un vagrant cheat-sheet que les podrá ayudar:
+Ref: [Cheat-sheet](https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4)
 
 ``` Tips
 
-Para poder hacer ping desde el AdminServer al resto de los nodos debemos configurar el archivos `hosts` que se encuentra en: >> /etc/hosts
+Para poder hacer ping desde el AdminServer al resto de los nodos debemos configurar el archivos `hosts` que se encuentra en: >> /etc/hosts (Host del AdminServer, en mi caso uso MobaXterm para entrar a los servidores vía ssh)
 
 Agrego un ejemplo, la cual esta en los archivos de este repositorio
 
@@ -64,35 +77,20 @@ ff02::2 ip6-allrouters
 172.16.1.53 node3
 ```
 
-Antes de continuar debemos iniciar nuestro laboratorio con el siguiente comando:
-
-$ vagrant up >> Con este comando iniciara tanto el AdminServer como los nodos
-
-Ahora si quieres iniciar más adelante solamente un nodo o el AdminServer:
-$ vagrant up AdminServer
-$ vagrant up Nodo1
-
-Si queremos bajar todo el Lab;
-$ vagrant halt
-
-De igual forma dejo un vagrant cheat-sheet que les podrá ayudar:
-Ref: [Cheat-sheet](https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4)
-
-
 ### SSH-Keygen
 
 🔎Primer paso: Vamos a crear nuestra key plublic/privada:
 
 ```` Command
 $ ssh-keygen
-The key fingerprint is: SHA256:K40ZGuut6/d13zt9V4zLBVjWocQVYgk7UexW8zm2+xM vagrant@AdminServer
+The key fingerprint is: SHA256:K40ZGuut6/d13zasdasdfaVjWocQ23daf22dexW8zm2+xM vagrant@AdminServer
 ````
 
 🔎Segundo Paso: Estaremos copiando nuestra ssh-key a todos los nodos para que tenga conectividad sin problema
 
 ``ssh-copy-id node1 && ssh-copy-id node2 && ssh-copy-id node3``
 
-Con los pasos anteriores podemos  hacer ssh sin password entre los mismos nodos y Adminserver.
+Con los pasos anteriores podemos  hacer ssh a los distintos nodos *sin password* entre los mismos nodos y Adminserver.
 
 -----
 ## Creación de Ansible
@@ -124,13 +122,13 @@ Nota: Para la extensión de Ansible en visual studio code que use fueron:
 - hosts: nodes
   become: true
   tasks:
-  - name: ensure docker is installed
+  - name:  docker is installed
     apt:
       name: docker.io
       state: latest
       update_cache: yes
 
-  - name: ensure docker-compose is installed
+  - name:  docker-compose is installed
     apt:
       name: docker-compose
       state: latest
@@ -189,7 +187,7 @@ Cambiar lo siguiente:
 *cat /etc/ssh/ssh_config
 StrictHostKeyChecking no*
 
-Tips & Bonus: Para verificar que la conexión desde el adminserver a los nodes están correcta al 100% con el siguiente comenado lo verificamos:
+Tips & Bonus: Para verificar que la conexión desde el adminserver a los nodos estan  al 100% correcto con el siguiente comando  lo verificamos:
 
 $ ssh -v node1 (*Debe entrar directo al node, si pide clave debes volver al punto numero uno en la parte de generación de key*)
 
@@ -199,6 +197,7 @@ $ ssh -v node1 (*Debe entrar directo al node, si pide clave debes volver al punt
 
 ## Instalación de Portainer en docker
 
+En esta guia de referencia solamente se extra la instalación del Portainer en el AdminServer
 Ref: [Guia para la instalación de Portainer](https://www.ionos.es/digitalguide/servidores/configuracion/instalar-portainer-en-docker/)
 
 Creamos el volumen
@@ -236,7 +235,7 @@ Si el servidor Portainer se ha instalado correctamente, **la interfaz web de Po
 
 En nuestro caso tenemos una IP para el AdminServer:
 
-Consola web: https://172.16.1.50:9443/
+Consola web: https://172.16.1.50:9443/ (Es importante agregarle el *https*)
 
 Cuando entramos por primera vez nos pide crear un usuario de admin y la clave
 
@@ -252,8 +251,11 @@ Dentro del Dashboard de Portainer nos aparecerá lo siguiente la cual estaremos 
 Esta vez lo haremos de forma manual ya que solamente contamos con 3 nodos (en caso de tener muchos nodos estare dejando un template de un playbook que pueden usar y modificar)
 
 
-1.  En la parte izquierda nos vamos para *environments* > *add environments* > *Edge Agent* > Name: *node1* 
+1. En la parte izquierda nos vamos para *environments* > *add environments* > *Edge Agent* > Name: *node1* 
+![](./Images/dashboard3.png)
+![](./Images/dashboard4.png)
 2. Al ejecutarlo nos dará varias opciones con algunos comando que debemos ejecutar en el node que queremos instalar el agent.
+![](./Images/dashboard5.png)
 3. En nuestro caso le damos la opción de Docker Standalone dejare un ejemplo:
 
 ````
@@ -273,6 +275,7 @@ docker run -d \
 ````
 
 4. Ahora entraremos a nuestros node4 y ejecutaremos ese bloque de comando, una vez finalizado vamos al Home de nuestro Portainer
+![](./Images/node3.png)
 5. Y allí ya observaremos que tendremos nuestro node conectado a nuestro Portainer
 ![](./Images/homenodes.png)
 
