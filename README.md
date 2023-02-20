@@ -1,7 +1,8 @@
-##                  DevOpsLabTools
+##                  Bunker de Lab
 
 
-Repositorio donde estaremos jugando con PoC / Lab con diferentes tecnología y arquitectura. Realizaremos muchas practicas donde se va adquirir muchos conocimientos requeridos para un Devops / SRE
+🕹 Este Bunker estaremos creando y/o jugando con *PoC / Lab* en diferentes tecnología y arquitectura. 
+🖱 Realizaremos muchas practicas para  adquirir muchos conocimientos requeridos para un Devops / SRE
 
 
-[Primer Repo: Lab-Vagran-Docker-Portainer](/lab-vagrant-docker)
+🟡 [Primer Repo: Lab-Vagran-Docker-Portainer](/lab-vagrant-docker)
