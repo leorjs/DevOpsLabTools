@@ -1,7 +1,7 @@
 ##                  Bunker de Lab
 
 
-🕹 Este Bunker estaremos creando y/o jugando con *PoC / Lab* en diferentes tecnología y arquitectura.   
+🕹 En este Bunker de desafios estaremos creando y/o jugando con *PoC / Lab* en diferentes tecnología y arquitectura.   
 
 🖱 Realizaremos muchas practicas para  adquirir muchos conocimientos requeridos para un Devops / SRE
 
